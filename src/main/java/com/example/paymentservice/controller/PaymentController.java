@@ -28,6 +28,7 @@ public class PaymentController {
                               Model model) {
 
         RequestPayDto requestDto = paymentService.findRequestDto(id);
+        log.info("requestDto = {}", requestDto);
         model.addAttribute("requestDto", requestDto);
         return "payment";
     }
@@ -35,6 +36,7 @@ public class PaymentController {
     @ResponseBody
     @PostMapping("/payment")
     public ResponseEntity<IamportResponse<Payment>> validationPayment(@RequestBody PaymentCallbackRequest request) {
+        log.info("호출");
         IamportResponse<Payment> iamportResponse = paymentService.paymentByCallback(request);
 
         log.info("결제 응답={}", iamportResponse.getResponse().toString());

@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member autoRegister() {
         Member member = Member.builder()
-                .username("kmk")
+                .username("김명균")
                 .email("kyun9151@naver.com")
                 .address("경기도 의정부시")
                 .build();

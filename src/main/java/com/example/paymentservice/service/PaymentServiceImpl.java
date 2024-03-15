@@ -17,9 +17,11 @@ import com.siot.IamportRestClient.response.Payment;
 import java.io.IOException;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -32,6 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public RequestPayDto findRequestDto(String orderUid) {
+
         Order order = orderRepository.findOrderAndPaymentAndMember(orderUid)
                 .orElseThrow(() -> new IllegalArgumentException("주문이 없습니다."));
 
@@ -47,11 +50,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public IamportResponse<Payment> paymentByCallback(PaymentCallbackRequest request) {
-
+        log.info("호출");
         try {
             // 결제 단건 조회(아임포트)
             IamportResponse<Payment> iamportResponse = iamportClient.paymentByImpUid(request.getPaymentUid());
-
+            log.info("결제 = {}", iamportResponse);
             // 주문내역 조회
             Order order = orderRepository.findOrderAndPayment(request.getOrderUid())
                     .orElseThrow(() -> new IllegalArgumentException("주문 내역이 없습니다."));

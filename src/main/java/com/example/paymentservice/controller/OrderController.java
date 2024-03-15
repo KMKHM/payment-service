@@ -7,12 +7,14 @@ import com.example.paymentservice.service.OrderService;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
@@ -34,9 +36,13 @@ public class OrderController {
     @PostMapping("/order")
     public String autoOrder() {
         Member member = memberService.autoRegister();
+
         Order order = orderService.autoOrder(member);
 
+        log.info("price = {}", order.getPrice());
+
         String message = "주문 실패";
+
         if(order != null) {
             message = "주문 성공";
         }

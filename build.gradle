@@ -40,7 +40,7 @@ dependencies {
 
 	//
     // https://mvnrepository.com/artifact/com.github.iamport/iamport-rest-client-java
-    implementation group: 'com.github.iamport', name: 'iamport-rest-client-java', version: '0.2.22'
+    implementation group: 'com.github.iamport', name: 'iamport-rest-client-java', version: '0.2.23'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava2
     implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.9.0'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
